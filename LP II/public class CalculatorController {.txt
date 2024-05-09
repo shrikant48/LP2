@@ -1,0 +1,49 @@
+public class CalculatorController {
+    public Integer num1 { get; set; }
+    public Integer num2 { get; set; }
+    public Integer result { get; set; }
+    
+    public void add() {
+        result = num1 + num2;
+    }
+    
+    public void subtract() {
+        result = num1 - num2;
+    }
+    
+    public void multiply() {
+        result = num1 * num2;
+    }
+    
+    public void divide() {
+        if (num2 != 0) {
+            result = num1 / num2;
+        } else {
+            result = null;
+        }
+    }
+}
+
+
+file 2
+
+<apex:page controller="CalculatorController">
+    <apex:form >
+        <apex:pageBlock title="Simple Calculator">
+            <apex:pageBlockSection >
+                <apex:inputText value="{!num1}" label="Number 1"/>
+                <apex:inputText value="{!num2}" label="Number 2"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!add}" value="Add"/>
+                <apex:commandButton action="{!subtract}" value="Subtract"/>
+                <apex:commandButton action="{!multiply}" value="Multiply"/>
+                <apex:commandButton action="{!divide}" value="Divide"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection >
+                <apex:outputText value="Result: {!result}" rendered="{!NOT(ISNULL(result))}"/>
+                <apex:outputText value="Cannot divide by zero" rendered="{!ISNULL(result)}"/>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>
